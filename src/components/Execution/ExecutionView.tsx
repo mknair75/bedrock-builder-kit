@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Pause, Clock, TrendingUp, Activity } from 'lucide-react';
+import { Pause, Clock, TrendingUp, Activity } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { mockAOFunctions, mockExecutionEvents } from '../../data/mockData';
 

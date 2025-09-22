@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExternalLink, Download, Info, Play, CreditCard } from 'lucide-react';
+import { Download, Info, Play, CreditCard } from 'lucide-react';
 import { AOFunction } from '../../types';
 
 interface FunctionCardProps {

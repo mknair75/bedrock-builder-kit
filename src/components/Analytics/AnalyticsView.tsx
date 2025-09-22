@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TrendingUp, TrendingDown, BarChart3, Target, Calendar } from 'lucide-react';
+import { TrendingUp, BarChart3, Target, Calendar } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { mockAOFunctions } from '../../data/mockData';
 

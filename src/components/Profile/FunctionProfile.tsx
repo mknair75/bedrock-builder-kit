@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowLeft, Download, Play, GitBranch, Zap, Shield } from 'lucide-react';
+import { ArrowLeft, Download, GitBranch, Zap, Shield } from 'lucide-react';
 import { AOFunction } from '../../types';
 
 interface FunctionProfileProps {

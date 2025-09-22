@@ -28,9 +28,9 @@ export const ConfigurationView: React.FC<ConfigurationViewProps> = ({ selectedFu
     },
     runtimeMode: 'Autonomous' as RuntimeMode,
     externalIntegrations: {
-      dataSources: [],
-      aiMlPipelines: [],
-      controlMechanisms: []
+      dataSources: [] as string[],
+      aiMlPipelines: [] as string[],
+      controlMechanisms: [] as string[]
     }
   });
 

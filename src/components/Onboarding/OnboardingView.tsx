@@ -113,7 +113,7 @@ export const OnboardingView: React.FC = () => {
 
   const domains = ['Order Handling', 'FinOps', 'Network Ops', 'MarketingOps', 'SalesOps', 'SLA', 'Sustainability'];
   const maturityLevels = ['Augmented', 'Automated', 'Autonomy'];
-  const capabilities = ['Reactive', 'Predictive', 'Adaptive', 'Reflective', 'Cognitive', 'Self-Learning'];
+  // const capabilities = ['Reactive', 'Predictive', 'Adaptive', 'Reflective', 'Cognitive', 'Self-Learning'];
   const lifecycleStages = ['Draft', 'Published', 'Deprecated'];
   const pricingModels = ['Per Execution', 'Per Optimization', 'Subscription', 'Outcome-Based'];
 

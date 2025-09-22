@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Filter, CreditCard } from 'lucide-react';
+import { Search, Filter } from 'lucide-react';
 import { AOFunction } from '../../types';
 import { mockAOFunctions, domains } from '../../data/mockData';
 import { FunctionCard } from './FunctionCard';

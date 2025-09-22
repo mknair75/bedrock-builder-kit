@@ -19,7 +19,7 @@ export const IntegrationView: React.FC = () => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [connections, setConnections] = useState<Connection[]>([]);
   const [selectedNode, setSelectedNode] = useState<string | null>(null);
-  const [draggedNode, setDraggedNode] = useState<string | null>(null);
+  // const [draggedNode, setDraggedNode] = useState<string | null>(null);
 
   // Initialize with a mock relationship
   React.useEffect(() => {
