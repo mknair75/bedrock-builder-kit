@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Header } from './components/Layout/Header';
 import { Sidebar } from './components/Layout/Sidebar';
 import { CatalogView } from './components/Catalog/CatalogView';
@@ -86,7 +86,7 @@ function App() {
       case 'lifecycle':
         return <LifecycleView onConfigure={handleConfigure} />;
       case 'configuration':
-        return <ConfigurationView selectedFunction={selectedFunction} />;
+        return <ConfigurationView selectedFunction={selectedFunction || undefined} />;
       case 'global-config':
         return <GlobalConfigView />;
       case 'integration':
@@ -102,7 +102,7 @@ function App() {
       case 'analytics':
         return <AnalyticsView />;
       default:
-        return <CatalogView onViewDetails={handleViewDetails} onDeploy={handleDeploy} />;
+        return <CatalogView onViewDetails={handleViewDetails} onDeploy={handleDeploy} onTry={handleTry} />;
     }
   };
 
