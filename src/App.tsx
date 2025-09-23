@@ -107,7 +107,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gradient-hero">
       <Header currentView={getViewTitle()} />
       <div className="flex">
         <Sidebar 
@@ -118,8 +118,10 @@ function App() {
             setSelectedFunction(null);
           }} 
         />
-        <main className="flex-1 p-6">
-          {renderCurrentView()}
+        <main className="flex-1 p-6 animate-fade-in">
+          <div className="max-w-7xl mx-auto">
+            {renderCurrentView()}
+          </div>
         </main>
       </div>
     </div>

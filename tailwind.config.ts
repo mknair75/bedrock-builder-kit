@@ -75,13 +75,14 @@ const config: Config = {
       },
       boxShadow: {
         'elegant': 'var(--shadow-elegant)',
-        'glow': 'var(--shadow-glow)',
+        'glow': 'var(--shadow-glow)', 
+        'card': 'var(--shadow-card)',
       },
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',
         'gradient-hero': 'var(--gradient-hero)',
         'gradient-card': 'var(--gradient-card)',
-        'gradient-subtle': 'var(--gradient-subtle)',
+        'gradient-secondary': 'var(--gradient-secondary)',
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

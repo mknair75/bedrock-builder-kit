@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Search, Grid, List, Star, Download, Play, Eye } from 'lucide-react';
 import { AOFunction } from '../../types';
 import { mockAOFunctions } from '../../data/mockData';
-import { statusColors, runtimeModeColors } from '../../styles/theme';
 
 interface ModernCatalogViewProps {
   onFunctionSelect: (func: AOFunction) => void;
@@ -23,80 +22,99 @@ export function ModernCatalogView({ onFunctionSelect }: ModernCatalogViewProps) 
     return matchesSearch && matchesDomain;
   });
 
+  const getStatusBadge = (status: string) => {
+    const statusMap = {
+      active: 'bg-green-50 text-green-700 border-green-200',
+      draft: 'bg-yellow-50 text-yellow-700 border-yellow-200',
+      deployed: 'bg-blue-50 text-blue-700 border-blue-200',
+      retired: 'bg-gray-50 text-gray-700 border-gray-200'
+    };
+    return statusMap[status.toLowerCase() as keyof typeof statusMap] || statusMap.draft;
+  };
+
+  const getModeColor = (mode: string) => {
+    const modeMap = {
+      autonomous: 'bg-purple-50 text-purple-700 border-purple-200',
+      hybrid: 'bg-blue-50 text-blue-700 border-blue-200',
+      manual: 'bg-orange-50 text-orange-700 border-orange-200'
+    };
+    return modeMap[mode.toLowerCase() as keyof typeof modeMap] || modeMap.autonomous;
+  };
+
   const FunctionCard = ({ func }: { func: AOFunction }) => (
-    <div className="modern-card p-6 group">
-      <div className="flex items-start justify-between mb-4">
-        <div className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center">
-            <span className="text-white font-bold text-lg">
+    <div className="modern-card p-6 group hover:shadow-xl transition-all duration-300">
+      <div className="flex items-start justify-between mb-6">
+        <div className="flex items-center space-x-4">
+          <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <span className="text-white font-bold text-xl">
               {func.name.charAt(0)}
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-gray-900 mb-1">
+            <h3 className="text-xl font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
               {func.name}
             </h3>
-            <p className="text-sm text-gray-500">{func.domain}</p>
+            <p className="text-sm text-muted-foreground font-medium">{func.domain}</p>
           </div>
         </div>
         
-        <div className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColors[func.status.toLowerCase() as keyof typeof statusColors] || statusColors.draft}`}>
+        <div className={`px-3 py-1.5 rounded-full text-xs font-semibold border ${getStatusBadge(func.status)}`}>
           {func.status}
         </div>
       </div>
 
-      <p className="text-gray-600 text-sm mb-4 line-clamp-2">
+      <p className="text-muted-foreground text-sm mb-6 line-clamp-2 leading-relaxed">
         {func.description}
       </p>
 
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-4 text-sm text-gray-500">
-          <span>v{func.version}</span>
+      <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center space-x-4 text-sm text-muted-foreground">
+          <span className="font-medium">v{func.version}</span>
           <span>•</span>
-          <span>{func.provider}</span>
+          <span className="font-medium">{func.provider}</span>
         </div>
         
-        <div className={`px-2 py-1 rounded-md text-xs font-medium border ${runtimeModeColors[func.currentMode] || runtimeModeColors.Autonomous}`}>
+        <div className={`px-3 py-1.5 rounded-lg text-xs font-semibold border ${getModeColor(func.currentMode)}`}>
           {func.currentMode}
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 mb-4 p-3 bg-gray-50 rounded-lg">
+      <div className="grid grid-cols-3 gap-4 mb-6 p-4 bg-muted/50 rounded-xl border border-border/50">
         <div className="text-center">
-          <div className="text-lg font-semibold text-gray-900">
-            {func.executionMetrics.frequency}
+          <div className="text-xl font-bold text-foreground mb-1">
+            {func.executionMetrics.frequency.toLocaleString()}
           </div>
-          <div className="text-xs text-gray-500">Executions</div>
+          <div className="text-xs text-muted-foreground font-medium">Executions</div>
         </div>
         <div className="text-center">
-          <div className="text-lg font-semibold text-green-600">
+          <div className="text-xl font-bold text-green-600 mb-1">
             {func.executionMetrics.successRate}%
           </div>
-          <div className="text-xs text-gray-500">Success Rate</div>
+          <div className="text-xs text-muted-foreground font-medium">Success Rate</div>
         </div>
         <div className="text-center">
-          <div className="text-lg font-semibold text-blue-600">
+          <div className="text-xl font-bold text-primary mb-1">
             {func.executionMetrics.avgExecutionTime}ms
           </div>
-          <div className="text-xs text-gray-500">Avg Time</div>
+          <div className="text-xs text-muted-foreground font-medium">Avg Time</div>
         </div>
       </div>
 
       <div className="flex items-center justify-between">
-        <div className="text-lg font-bold text-primary">
+        <div className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
           {func.price}
         </div>
         
         <div className="flex items-center space-x-2">
-          <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors" title="View Details">
-            <Eye className="w-4 h-4 text-gray-600" />
+          <button className="p-2.5 rounded-xl hover:bg-muted transition-all duration-200 hover:scale-110" title="View Details">
+            <Eye className="w-4 h-4 text-muted-foreground" />
           </button>
-          <button className="p-2 rounded-lg hover:bg-gray-100 transition-colors" title="Try Function">
-            <Play className="w-4 h-4 text-gray-600" />
+          <button className="p-2.5 rounded-xl hover:bg-muted transition-all duration-200 hover:scale-110" title="Try Function">
+            <Play className="w-4 h-4 text-muted-foreground" />
           </button>
           <button 
             onClick={() => onFunctionSelect(func)}
-            className="px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+            className="modern-button-primary px-5 py-2.5 text-sm font-semibold"
           >
             Configure
           </button>
@@ -106,55 +124,61 @@ export function ModernCatalogView({ onFunctionSelect }: ModernCatalogViewProps) 
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Function Catalog</h1>
-          <p className="text-gray-600">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <div className="space-y-2">
+          <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent">
+            Function Catalog
+          </h1>
+          <p className="text-lg text-muted-foreground">
             Discover and deploy AO functions for your autonomous operations
           </p>
         </div>
         
         <div className="flex items-center space-x-3">
-          <div className="flex bg-gray-100 rounded-lg p-1">
+          <div className="flex bg-muted rounded-xl p-1 border border-border">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-2 rounded-md transition-colors ${
-                viewMode === 'grid' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'
+              className={`p-3 rounded-lg transition-all duration-200 ${
+                viewMode === 'grid' 
+                  ? 'bg-card shadow-md scale-105' 
+                  : 'hover:bg-card/50 hover:scale-105'
               }`}
             >
-              <Grid className="w-4 h-4" />
+              <Grid className="w-5 h-5" />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-2 rounded-md transition-colors ${
-                viewMode === 'list' ? 'bg-white shadow-sm' : 'hover:bg-gray-200'
+              className={`p-3 rounded-lg transition-all duration-200 ${
+                viewMode === 'list' 
+                  ? 'bg-card shadow-md scale-105' 
+                  : 'hover:bg-card/50 hover:scale-105'
               }`}
             >
-              <List className="w-4 h-4" />
+              <List className="w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="flex flex-col lg:flex-row gap-4">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="relative flex-1 group">
+          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5 group-focus-within:text-primary transition-colors" />
           <input
             type="text"
             placeholder="Search functions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="modern-input pl-12 pr-4 py-4 text-base"
           />
         </div>
         
         <select
           value={selectedDomain}
           onChange={(e) => setSelectedDomain(e.target.value)}
-          className="px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent bg-white min-w-[200px]"
+          className="modern-input min-w-[200px] px-4 py-4 text-base font-medium"
         >
           {domains.map(domain => (
             <option key={domain} value={domain}>{domain}</option>
@@ -163,57 +187,57 @@ export function ModernCatalogView({ onFunctionSelect }: ModernCatalogViewProps) 
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <div className="bg-white rounded-xl p-6 border border-gray-200">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="modern-stat-card group">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Total Functions</p>
-              <p className="text-2xl font-bold text-gray-900">{functions.length}</p>
+              <p className="text-sm text-muted-foreground font-medium mb-2">Total Functions</p>
+              <p className="text-3xl font-bold text-foreground">{functions.length}</p>
             </div>
-            <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center">
-              <Grid className="w-6 h-6 text-blue-600" />
+            <div className="w-14 h-14 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <Grid className="w-7 h-7 text-white" />
             </div>
           </div>
         </div>
         
-        <div className="bg-white rounded-xl p-6 border border-gray-200">
+        <div className="modern-stat-card group">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Active Functions</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-sm text-muted-foreground font-medium mb-2">Active Functions</p>
+              <p className="text-3xl font-bold text-foreground">
                 {functions.filter(f => f.status === 'Active').length}
               </p>
             </div>
-            <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
-              <Play className="w-6 h-6 text-green-600" />
+            <div className="w-14 h-14 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <Play className="w-7 h-7 text-white" />
             </div>
           </div>
         </div>
         
-        <div className="bg-white rounded-xl p-6 border border-gray-200">
+        <div className="modern-stat-card group">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Avg Success Rate</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-sm text-muted-foreground font-medium mb-2">Avg Success Rate</p>
+              <p className="text-3xl font-bold text-foreground">
                 {Math.round(functions.reduce((acc, f) => acc + f.executionMetrics.successRate, 0) / functions.length)}%
               </p>
             </div>
-            <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center">
-              <Star className="w-6 h-6 text-purple-600" />
+            <div className="w-14 h-14 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <Star className="w-7 h-7 text-white" />
             </div>
           </div>
         </div>
         
-        <div className="bg-white rounded-xl p-6 border border-gray-200">
+        <div className="modern-stat-card group">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-gray-600">Total Executions</p>
-              <p className="text-2xl font-bold text-gray-900">
+              <p className="text-sm text-muted-foreground font-medium mb-2">Total Executions</p>
+              <p className="text-3xl font-bold text-foreground">
                 {functions.reduce((acc, f) => acc + f.executionMetrics.frequency, 0).toLocaleString()}
               </p>
             </div>
-            <div className="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center">
-              <Download className="w-6 h-6 text-orange-600" />
+            <div className="w-14 h-14 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+              <Download className="w-7 h-7 text-white" />
             </div>
           </div>
         </div>
@@ -232,12 +256,12 @@ export function ModernCatalogView({ onFunctionSelect }: ModernCatalogViewProps) 
       </div>
 
       {filteredFunctions.length === 0 && (
-        <div className="text-center py-12">
-          <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Search className="w-8 h-8 text-gray-400" />
+        <div className="text-center py-16 animate-fade-in">
+          <div className="w-32 h-32 bg-gradient-hero rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl">
+            <Search className="w-12 h-12 text-primary" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No functions found</h3>
-          <p className="text-gray-600">Try adjusting your search criteria</p>
+          <h3 className="text-2xl font-semibold text-foreground mb-3">No functions found</h3>
+          <p className="text-muted-foreground text-lg">Try adjusting your search criteria</p>
         </div>
       )}
     </div>

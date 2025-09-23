@@ -15,7 +15,7 @@
   }
   
   :root {
-    --background: 0 0% 100%;
+    --background: 0 0% 98%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -23,22 +23,30 @@
     --popover-foreground: 222.2 84% 4.9%;
     --primary: 262 83% 58%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222.2 84% 4.9%;
-    --muted: 210 40% 96%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96%;
-    --accent-foreground: 222.2 84% 4.9%;
+    --primary-glow: 271 91% 65%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 262 83% 58%;
     --radius: 0.75rem;
     
-    /* Custom gradient tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(262, 83%, 58%), hsl(262, 83%, 68%));
-    --gradient-subtle: linear-gradient(180deg, hsl(210, 40%, 98%), hsl(210, 40%, 96%));
+    /* Enhanced gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--primary-glow) / 0.05));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 14.3% 99%));
+    
+    /* Enhanced shadows */
+    --shadow-elegant: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
+    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.15);
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
   }
 
   .dark {
@@ -48,8 +56,9 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 262 83% 58%;
+    --primary: 271 91% 65%;
     --primary-foreground: 222.2 84% 4.9%;
+    --primary-glow: 262 83% 58%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
     --muted: 217.2 32.6% 17.5%;
@@ -60,53 +69,48 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 262 83% 58%;
+    --ring: 271 91% 65%;
     
-    --gradient-primary: linear-gradient(135deg, hsl(262, 83%, 58%), hsl(262, 83%, 68%));
-    --gradient-subtle: linear-gradient(180deg, hsl(217.2, 32.6%, 17.5%), hsl(217.2, 32.6%, 15.5%));
+    /* Dark mode gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.2), hsl(var(--primary-glow) / 0.1));
+    --gradient-card: linear-gradient(135deg, hsl(222.2 84% 4.9%), hsl(217.2 32.6% 17.5%));
   }
 }
 
 @layer components {
+  /* Enhanced component styles */
   .modern-card {
-    border-radius: 0.75rem;
-    border: 1px solid hsl(var(--border));
-    background-color: hsl(var(--card));
-    color: hsl(var(--card-foreground));
-    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    transition: all 300ms ease;
+    @apply bg-white rounded-2xl border border-gray-200 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] backdrop-blur-sm;
+    border-color: rgb(229 231 235 / 0.8);
   }
-  
+
   .modern-card:hover {
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    border-color: hsl(var(--primary) / 0.2);
   }
-  
+
   .modern-input {
-    display: flex;
-    height: 2.5rem;
-    width: 100%;
-    border-radius: 0.375rem;
-    border: 1px solid hsl(var(--input));
-    background-color: hsl(var(--background));
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    transition: all 150ms ease;
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 transition-all duration-200 shadow-sm hover:shadow-md;
   }
-  
-  .modern-input:focus-visible {
-    outline: none;
-    box-shadow: 0 0 0 2px hsl(var(--ring));
-  }
-  
+
   .modern-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
-    border-radius: 0.375rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 150ms ease;
-    cursor: pointer;
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl text-sm font-medium transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md active:scale-95;
+  }
+
+  .modern-button-primary {
+    @apply modern-button text-white hover:shadow-xl hover:scale-105;
+    background: linear-gradient(135deg, hsl(262, 83%, 58%), hsl(271, 91%, 65%));
+  }
+
+  .modern-button-secondary {
+    @apply modern-button bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200;
+  }
+
+  .modern-stat-card {
+    @apply bg-white rounded-2xl p-6 border border-gray-200 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105;
+  }
+
+  .glass-effect {
+    @apply backdrop-blur-lg bg-white/80 border border-gray-200/50;
   }
 }
