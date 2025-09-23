@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react';
-import { NavigationView } from '../../App';
+import { NavigationView } from '../../types';
 import {
   LayoutDashboard,
   BarChart3,
@@ -13,7 +13,6 @@ import {
   Target,
   Globe,
   Menu,
-  X,
   Sparkles,
 } from 'lucide-react';
 

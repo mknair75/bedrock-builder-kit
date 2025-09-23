@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Filter, Grid, List, Star, Download, Play, Eye } from 'lucide-react';
+import { Search, Grid, List, Star, Download, Play, Eye } from 'lucide-react';
 import { AOFunction } from '../../types';
 import { mockAOFunctions } from '../../data/mockData';
 import { statusColors, runtimeModeColors } from '../../styles/theme';
