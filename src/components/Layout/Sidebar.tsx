@@ -137,8 +137,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange }) =
                           onClick={() => onViewChange(item.id)}
                           className={`w-full flex items-center space-x-3 px-3 py-2.5 rounded-lg text-left transition-all duration-300 group ${
                             isActive
-                              ? 'bg-gradient-primary text-white shadow-lg scale-[1.02] border border-primary/20'
-                              : 'text-gray-700 hover:bg-white/60 hover:shadow-sm hover:scale-[1.01]'
+                              ? 'bg-primary text-primary-foreground shadow-lg scale-[1.02] border border-primary/30 font-semibold'
+                              : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground hover:shadow-sm hover:scale-[1.01]'
                           }`}
                         >
                           <Icon className={`h-4 w-4 transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-105'}`} />
