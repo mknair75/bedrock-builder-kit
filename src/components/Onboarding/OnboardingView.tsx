@@ -55,49 +55,60 @@ interface OnboardingData {
   useCases: string[];
   sandboxTests: string[];
   healthChecks: string[];
+
+  // Custom Attributes
+  customAttributes: Record<string, any>;
 }
 
 export const OnboardingView: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<OnboardingData>({
-    functionName: '',
-    functionId: '',
-    version: '1.0.0',
-    businessOwner: '',
-    technicalOwner: '',
+    functionName: 'Smart Order Optimizer',
+    functionId: 'smart-order-optimizer-v2',
+    version: '2.1.0',
+    businessOwner: 'Sarah Johnson',
+    technicalOwner: 'Mike Chen',
     domain: 'Order Handling',
-    businessDescription: '',
+    businessDescription: 'An intelligent AO function that optimizes order processing workflows using predictive analytics and machine learning to reduce processing time by 40% and improve customer satisfaction scores.',
     maturityLevel: 'Automated',
-    functionalCapabilities: [],
-    valueProposition: '',
-    targetKPIs: [],
-    expectedKBIs: [],
-    inputSpecs: [],
-    outputSpecs: [],
-    interfaces: [],
-    dependencies: [],
-    deploymentPackage: '',
-    closedLoops: [],
-    intentTemplates: [],
-    aiAgents: [],
-    aiModels: [],
-    policies: [],
-    odaComponents: [],
-    tmForumApis: [],
-    otherAOFunctions: [],
-    lifecycleStage: 'Draft',
-    stewardshipRoles: [],
-    consumptionPolicies: [],
-    securityRequirements: [],
+    functionalCapabilities: ['Predictive Analytics', 'Workflow Optimization', 'Real-time Processing', 'Smart Routing'],
+    valueProposition: 'Reduces order processing time by 40%, increases throughput by 60%, and improves customer satisfaction scores by 25% through intelligent automation.',
+    targetKPIs: ['Order Processing Time < 2 minutes', 'Customer Satisfaction > 95%', 'System Uptime > 99.9%'],
+    expectedKBIs: ['Revenue Growth +15%', 'Cost Reduction -30%', 'Customer Retention +20%'],
+    inputSpecs: ['Order Request Schema v2.1', 'Customer Profile Data', 'Inventory Status Feed'],
+    outputSpecs: ['Optimized Order Route', 'Processing Status Updates', 'Performance Metrics'],
+    interfaces: ['REST API v2.1', 'GraphQL Endpoint', 'WebSocket Events', 'Kafka Message Bus'],
+    dependencies: ['Inventory Management System', 'Customer Database', 'Payment Gateway'],
+    deploymentPackage: 'docker.io/telecom/smart-order-optimizer:2.1.0',
+    closedLoops: ['Order Volume Controller', 'Performance Optimizer', 'Resource Allocator'],
+    intentTemplates: ['Optimize Order Processing', 'Minimize Wait Time', 'Maximize Throughput'],
+    aiAgents: ['Order Classification Agent', 'Route Optimization Agent', 'Anomaly Detection Agent'],
+    aiModels: ['Order Priority ML Model', 'Demand Forecasting Model', 'Customer Behavior Predictor'],
+    policies: ['Data Privacy Policy', 'Order Processing SLA', 'Security Compliance Policy'],
+    odaComponents: ['Order Management API', 'Customer Management API', 'Product Catalog API'],
+    tmForumApis: ['TMF622 Product Ordering', 'TMF620 Product Catalog', 'TMF632 Party Management'],
+    otherAOFunctions: ['Dynamic Pricing Engine', 'Inventory Optimizer', 'Customer Experience Manager'],
+    lifecycleStage: 'Published',
+    stewardshipRoles: ['Data Steward', 'Technical Lead', 'Business Owner', 'Compliance Officer'],
+    consumptionPolicies: ['Rate Limiting: 1000 req/min', 'Authentication Required', 'Audit Logging Enabled'],
+    securityRequirements: ['OAuth 2.0 Authentication', 'TLS 1.3 Encryption', 'Role-based Access Control'],
     pricingModel: 'Per Execution',
-    billingIntegration: 'Enterprise Billing',
-    slaOptions: [],
-    keis: [],
-    kcis: [],
-    kbis: [],
-    useCases: [],
-    sandboxTests: [],
-    healthChecks: []
+    billingIntegration: 'Enterprise Billing Gateway',
+    slaOptions: ['99.9% Uptime SLA', 'Response Time < 100ms', '24/7 Support'],
+    keis: ['Processing Efficiency: 95%', 'Error Rate: <0.1%', 'Resource Utilization: 85%'],
+    kcis: ['Throughput: 10,000 orders/hour', 'Scalability: Auto-scale to 50 instances', 'Reliability: 99.95%'],
+    kbis: ['Cost per Order: $0.05', 'Revenue Impact: +$2M annually', 'Customer Satisfaction: 96%'],
+    useCases: ['High-volume order processing', 'Peak season optimization', 'Multi-channel order routing'],
+    sandboxTests: ['Load Test: 50,000 concurrent orders', 'Performance Test: Sub-100ms response', 'Chaos Test: 99.9% resilience'],
+    healthChecks: ['API Health Endpoint', 'Database Connection Check', 'External Service Dependency Check'],
+    customAttributes: {
+      priority: 'High',
+      category: 'Core Business Function',
+      tags: ['AI-Powered', 'Real-time', 'Scalable'],
+      region: 'Global',
+      compliance: ['GDPR', 'SOX', 'PCI-DSS'],
+      supportLevel: '24/7 Premium'
+    }
   });
 
   const steps = [
@@ -108,7 +119,8 @@ export const OnboardingView: React.FC = () => {
     { id: 5, title: 'Governance & Security', description: 'Policies and security' },
     { id: 6, title: 'Monetization Settings', description: 'Pricing and billing' },
     { id: 7, title: 'Effectiveness & Metrics', description: 'KPIs and measurements' },
-    { id: 8, title: 'Operational Scenarios', description: 'Use cases and testing' }
+    { id: 8, title: 'Operational Scenarios', description: 'Use cases and testing' },
+    { id: 9, title: 'Custom Attributes', description: 'Additional custom properties' }
   ];
 
   const domains = ['Order Handling', 'FinOps', 'Network Ops', 'MarketingOps', 'SalesOps', 'SLA', 'Sustainability'];
@@ -639,6 +651,139 @@ export const OnboardingView: React.FC = () => {
               placeholder="Add health check"
               color="orange"
             />
+          </div>
+        );
+
+      case 9:
+        return (
+          <div className="space-y-6">
+            <h3 className="text-lg font-semibold text-gray-900">Custom Attributes</h3>
+            <p className="text-sm text-gray-600 mb-4">
+              Define additional custom properties specific to your AO Function that don't fit into the standard categories.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Priority Level</label>
+                <select
+                  value={formData.customAttributes.priority || 'Medium'}
+                  onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    customAttributes: { ...prev.customAttributes, priority: e.target.value }
+                  }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="Low">Low</option>
+                  <option value="Medium">Medium</option>
+                  <option value="High">High</option>
+                  <option value="Critical">Critical</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Function Category</label>
+                <input
+                  type="text"
+                  value={formData.customAttributes.category || ''}
+                  onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    customAttributes: { ...prev.customAttributes, category: e.target.value }
+                  }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  placeholder="e.g., Core Business Function"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Deployment Region</label>
+                <select
+                  value={formData.customAttributes.region || 'Global'}
+                  onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    customAttributes: { ...prev.customAttributes, region: e.target.value }
+                  }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="Global">Global</option>
+                  <option value="North America">North America</option>
+                  <option value="Europe">Europe</option>
+                  <option value="Asia Pacific">Asia Pacific</option>
+                  <option value="Latin America">Latin America</option>
+                </select>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Support Level</label>
+                <select
+                  value={formData.customAttributes.supportLevel || 'Standard'}
+                  onChange={(e) => setFormData(prev => ({
+                    ...prev,
+                    customAttributes: { ...prev.customAttributes, supportLevel: e.target.value }
+                  }))}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="Basic">Basic (Business Hours)</option>
+                  <option value="Standard">Standard (Extended Hours)</option>
+                  <option value="Premium">Premium (24/7)</option>
+                  <option value="Enterprise">Enterprise (Dedicated)</option>
+                </select>
+              </div>
+            </div>
+
+            <ArrayInput
+              label="Function Tags"
+              items={formData.customAttributes.tags || []}
+              onAdd={(value) => setFormData(prev => ({
+                ...prev,
+                customAttributes: { 
+                  ...prev.customAttributes, 
+                  tags: [...(prev.customAttributes.tags || []), value] 
+                }
+              }))}
+              onRemove={(index) => setFormData(prev => ({
+                ...prev,
+                customAttributes: { 
+                  ...prev.customAttributes, 
+                  tags: (prev.customAttributes.tags || []).filter((_: any, i: number) => i !== index)
+                }
+              }))}
+              placeholder="Add descriptive tag"
+              color="purple"
+            />
+
+            <ArrayInput
+              label="Compliance Requirements"
+              items={formData.customAttributes.compliance || []}
+              onAdd={(value) => setFormData(prev => ({
+                ...prev,
+                customAttributes: { 
+                  ...prev.customAttributes, 
+                  compliance: [...(prev.customAttributes.compliance || []), value] 
+                }
+              }))}
+              onRemove={(index) => setFormData(prev => ({
+                ...prev,
+                customAttributes: { 
+                  ...prev.customAttributes, 
+                  compliance: (prev.customAttributes.compliance || []).filter((_: any, i: number) => i !== index)
+                }
+              }))}
+              placeholder="Add compliance standard (e.g., GDPR, SOX)"
+              color="red"
+            />
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Additional Notes</label>
+              <textarea
+                value={formData.customAttributes.notes || ''}
+                onChange={(e) => setFormData(prev => ({
+                  ...prev,
+                  customAttributes: { ...prev.customAttributes, notes: e.target.value }
+                }))}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent h-24 resize-none"
+                placeholder="Any additional information or special considerations for this AO Function..."
+              />
+            </div>
           </div>
         );
 

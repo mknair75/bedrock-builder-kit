@@ -34,7 +34,7 @@ export interface AOFunction {
 
 export type RuntimeMode = 'Autonomous' | 'HITL' | 'HOTL';
 
-export type NavigationView = 'catalog' | 'analytics' | 'configuration' | 'execution' | 'integration' | 'onboarding' | 'lifecycle' | 'orchestration' | 'coordination' | 'intent' | 'global-config';
+export type NavigationView = 'catalog' | 'dashboard' | 'analytics' | 'configuration' | 'execution' | 'integration' | 'onboarding' | 'lifecycle' | 'orchestration' | 'coordination' | 'intent' | 'global-config';
 
 export interface TMFApi {
   id: string;

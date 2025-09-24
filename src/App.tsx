@@ -14,6 +14,7 @@ import { CoordinationView } from './components/Coordination/CoordinationView';
 import { OrchestrationView } from './components/Orchestration/OrchestrationView';
 import { AnalyticsView } from './components/Analytics/AnalyticsView';
 import { OnboardingView } from './components/Onboarding/OnboardingView';
+import { AOFunctionDashboard } from './components/Dashboard/AOFunctionDashboard';
 import { AOFunction } from './types';
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
     
     switch (currentView) {
       case 'catalog': return 'Function Catalog';
+      case 'dashboard': return 'AO Function Dashboard';
       case 'onboarding': return 'Onboard New Function';
       case 'lifecycle': return 'Lifecycle Management';
       case 'configuration': return 'Configuration Console';
@@ -81,6 +83,8 @@ function App() {
     switch (currentView) {
       case 'catalog':
         return <CatalogView onViewDetails={handleViewDetails} onDeploy={handleDeploy} onTry={handleTry} />;
+      case 'dashboard':
+        return <AOFunctionDashboard />;
       case 'onboarding':
         return <OnboardingView />;
       case 'lifecycle':
