@@ -37,16 +37,18 @@
     --ring: 262 83% 58%;
     --radius: 0.75rem;
     
-    /* Enhanced gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
-    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--accent)));
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--primary-glow) / 0.05));
-    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 14.3% 99%));
-    
-    /* Enhanced shadows */
-    --shadow-elegant: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px -1px hsl(0 0% 0% / 0.1);
-    --shadow-glow: 0 0 40px hsl(var(--primary) / 0.15);
-    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
+  /* Enhanced gradients for enterprise feel */
+  --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary)) 50%, hsl(217 91% 65%) 100%);
+  --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--muted)));
+  --gradient-accent: linear-gradient(135deg, hsl(var(--accent)), hsl(var(--accent-foreground) / 0.1));
+  --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--secondary) / 0.05), hsl(var(--accent) / 0.03));
+  --gradient-enterprise: linear-gradient(135deg, hsl(220 26% 14%) 0%, hsl(220 26% 18%) 50%, hsl(217 91% 65% / 0.1) 100%);
+  
+  /* Enterprise shadows */
+  --shadow-elegant: 0 10px 30px -10px hsl(var(--primary) / 0.3);
+  --shadow-soft: 0 4px 12px -2px hsl(var(--foreground) / 0.1);
+  --shadow-glow: 0 0 40px hsl(var(--primary) / 0.2);
+  --shadow-enterprise: 0 20px 40px -10px hsl(var(--primary) / 0.15);
   }
 
   .dark {
@@ -79,18 +81,18 @@
 }
 
 @layer components {
-  /* Enhanced component styles */
+  /* Enterprise-grade component styles */
   .modern-card {
     @apply bg-white rounded-2xl border border-gray-200 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] backdrop-blur-sm;
-    border-color: rgb(229 231 235 / 0.8);
   }
 
   .modern-card:hover {
-    border-color: hsl(var(--primary) / 0.2);
+    box-shadow: var(--shadow-enterprise);
+    border-color: hsl(var(--primary) / 0.3);
   }
 
   .modern-input {
-    @apply w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-500 transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-gray-900 placeholder-gray-500 focus:ring-2 focus:ring-blue-200 focus:border-blue-500 transition-all duration-200 shadow-sm hover:shadow-md;
   }
 
   .modern-button {
@@ -99,7 +101,7 @@
 
   .modern-button-primary {
     @apply modern-button text-white hover:shadow-xl hover:scale-105;
-    background: linear-gradient(135deg, hsl(262, 83%, 58%), hsl(271, 91%, 65%));
+    background: var(--gradient-primary);
   }
 
   .modern-button-secondary {
@@ -110,7 +112,31 @@
     @apply bg-white rounded-2xl p-6 border border-gray-200 shadow-lg transition-all duration-300 hover:shadow-2xl hover:scale-105;
   }
 
+  .modern-stat-card:hover {
+    box-shadow: var(--shadow-enterprise);
+  }
+
   .glass-effect {
     @apply backdrop-blur-lg bg-white/80 border border-gray-200/50;
+  }
+
+  .enterprise-gradient {
+    background: var(--gradient-enterprise);
+  }
+
+  .hero-background {
+    background: var(--gradient-hero);
+    position: relative;
+  }
+
+  .hero-background::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/src/assets/enterprise-hero-bg.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.03;
+    z-index: -1;
   }
 }

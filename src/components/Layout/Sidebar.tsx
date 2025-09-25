@@ -15,6 +15,7 @@ import {
   ChevronDown,
   Activity
 } from 'lucide-react';
+import aoPlatformLogo from '../../assets/ao-platform-logo.png';
 
 interface SidebarProps {
   currentView: string;
@@ -93,12 +94,16 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange }) =
       <div className="p-6">
         <div className="mb-8">
           <div className="flex items-center space-x-3 mb-6">
-            <div className="w-8 h-8 bg-gradient-primary rounded-xl flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-sm">AO</span>
-            </div>
+            <img 
+              src={aoPlatformLogo} 
+              alt="AO Platform" 
+              className="w-10 h-10 object-contain"
+            />
             <div>
-              <h2 className="font-bold text-gray-900">Navigation</h2>
-              <p className="text-xs text-gray-500">Function Management</p>
+              <h2 className="font-bold bg-gradient-to-r from-primary to-primary/80 bg-clip-text text-transparent">
+                AO Platform
+              </h2>
+              <p className="text-xs text-muted-foreground font-medium">Enterprise Dashboard</p>
             </div>
           </div>
         </div>
@@ -156,18 +161,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ currentView, onViewChange }) =
           })}
         </nav>
 
-        <div className="mt-8 p-4 bg-white/50 rounded-2xl border border-gray-200/50">
+        <div className="mt-8 p-4 bg-white/50 rounded-2xl border border-primary/20 shadow-lg">
           <div className="flex items-center space-x-3 mb-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-green-600 rounded-xl flex items-center justify-center shadow-sm">
               <span className="text-white text-xs font-bold">✓</span>
             </div>
             <div>
-              <p className="text-sm font-semibold text-gray-900">System Status</p>
+              <p className="text-sm font-semibold text-foreground">Enterprise Status</p>
               <p className="text-xs text-green-600 font-medium">All systems operational</p>
             </div>
           </div>
-          <div className="w-full bg-gray-200 rounded-full h-2">
+          <div className="w-full bg-muted rounded-full h-2 mb-2">
             <div className="bg-gradient-to-r from-green-400 to-green-600 h-2 rounded-full w-full"></div>
+          </div>
+          <div className="flex justify-between text-xs text-muted-foreground">
+            <span>Uptime: 99.9%</span>
+            <span>24/7 Support</span>
           </div>
         </div>
       </div>

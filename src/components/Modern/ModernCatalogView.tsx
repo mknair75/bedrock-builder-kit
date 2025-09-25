@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, Grid, List, Star, Download, Play, Eye } from 'lucide-react';
+import { Search, Grid, List, Star, Download, Play, Eye, Award, TrendingUp } from 'lucide-react';
 import { AOFunction } from '../../types';
 import { mockAOFunctions } from '../../data/mockData';
 
@@ -125,25 +125,44 @@ export function ModernCatalogView({ onFunctionSelect }: ModernCatalogViewProps) 
 
   return (
     <div className="space-y-8">
-      {/* Header */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-            Function Catalog
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Discover and deploy AO functions for your autonomous operations
-          </p>
-        </div>
-        
-        <div className="flex items-center space-x-3">
-          <div className="flex bg-muted rounded-xl p-1 border border-border">
+      {/* Enterprise Hero Section */}
+      <div className="relative hero-background rounded-3xl p-8 mb-8 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-enterprise rounded-3xl opacity-50"></div>
+        <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+          <div className="space-y-4">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-primary/20 rounded-2xl flex items-center justify-center backdrop-blur-sm">
+                <Award className="w-6 h-6 text-primary" />
+              </div>
+              <div>
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                  Enterprise Function Catalog
+                </h1>
+                <p className="text-lg text-muted-foreground mt-1">
+                  Mission-critical autonomous operations at enterprise scale
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center space-x-6 text-sm">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <span className="text-muted-foreground font-medium">99.9% Uptime SLA</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <TrendingUp className="w-4 h-4 text-primary" />
+                <span className="text-muted-foreground font-medium">Enterprise Grade Security</span>
+              </div>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3">
+            <div className="flex bg-muted/50 rounded-xl p-1 border border-border/50 backdrop-blur-sm">
             <button
               onClick={() => setViewMode('grid')}
               className={`p-3 rounded-lg transition-all duration-200 ${
                 viewMode === 'grid' 
-                  ? 'bg-card shadow-md scale-105' 
-                  : 'hover:bg-card/50 hover:scale-105'
+                  ? 'bg-white shadow-md scale-105 text-primary' 
+                  : 'hover:bg-white/50 hover:scale-105'
               }`}
             >
               <Grid className="w-5 h-5" />
@@ -152,23 +171,24 @@ export function ModernCatalogView({ onFunctionSelect }: ModernCatalogViewProps) 
               onClick={() => setViewMode('list')}
               className={`p-3 rounded-lg transition-all duration-200 ${
                 viewMode === 'list' 
-                  ? 'bg-card shadow-md scale-105' 
-                  : 'hover:bg-card/50 hover:scale-105'
+                  ? 'bg-white shadow-md scale-105 text-primary' 
+                  : 'hover:bg-white/50 hover:scale-105'
               }`}
             >
               <List className="w-5 h-5" />
             </button>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Filters */}
+      {/* Search and Filters */}
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="relative flex-1 group">
           <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground w-5 h-5 group-focus-within:text-primary transition-colors" />
           <input
             type="text"
-            placeholder="Search functions..."
+            placeholder="Search enterprise functions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="modern-input pl-12 pr-4 py-4 text-base"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, Bell, User, Settings } from 'lucide-react';
+import aoPlatformLogo from '../../assets/ao-platform-logo.png';
 
 interface HeaderProps {
   currentView: string;
@@ -11,18 +12,20 @@ export const Header: React.FC<HeaderProps> = ({ currentView }) => {
       <div className="flex items-center justify-between max-w-7xl mx-auto">
         <div className="flex items-center space-x-6">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-lg">
-              <span className="text-white font-bold text-lg">AO</span>
-            </div>
+            <img 
+              src={aoPlatformLogo} 
+              alt="AO Platform Logo" 
+              className="w-12 h-12 object-contain"
+            />
             <div>
-              <h1 className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                Function Cockpit
+              <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                AO Platform Enterprise
               </h1>
-              <p className="text-xs text-gray-500 font-medium">v2.0.1 - Enhanced</p>
+              <p className="text-xs text-muted-foreground font-medium">v2.1.0 - Enterprise Edition</p>
             </div>
           </div>
-          <div className="hidden lg:flex items-center space-x-2 text-sm text-gray-500 bg-white/50 px-3 py-1.5 rounded-xl border border-gray-200/50">
-            <span>Dashboard</span>
+          <div className="hidden lg:flex items-center space-x-2 text-sm text-gray-500 bg-white/50 px-4 py-2 rounded-xl border border-gray-200/50 shadow-sm">
+            <span>Enterprise Dashboard</span>
             <span>/</span>
             <span className="text-gray-900 font-semibold">{currentView}</span>
           </div>
@@ -38,22 +41,22 @@ export const Header: React.FC<HeaderProps> = ({ currentView }) => {
             />
           </div>
           
-          <button className="relative p-3 text-gray-600 hover:text-primary hover:bg-white/70 rounded-xl transition-all duration-200 hover:scale-110">
+          <button className="relative p-3 text-muted-foreground hover:text-primary hover:bg-accent rounded-xl transition-all duration-200 hover:scale-110 shadow-sm hover:shadow-md">
             <Bell className="h-5 w-5" />
-            <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-red-500 rounded-full ring-2 ring-white"></span>
+            <span className="absolute top-2 right-2 w-2.5 h-2.5 bg-destructive rounded-full ring-2 ring-background animate-pulse"></span>
           </button>
           
-          <button className="p-3 text-gray-600 hover:text-primary hover:bg-white/70 rounded-xl transition-all duration-200 hover:scale-110">
+          <button className="p-3 text-muted-foreground hover:text-primary hover:bg-accent rounded-xl transition-all duration-200 hover:scale-110 shadow-sm hover:shadow-md">
             <Settings className="h-5 w-5" />
           </button>
           
-          <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-gray-200/50">
-            <div className="w-10 h-10 bg-gradient-to-br from-gray-300 to-gray-400 rounded-xl flex items-center justify-center shadow-md">
+          <div className="flex items-center space-x-3 ml-4 pl-4 border-l border-border/50">
+            <div className="w-10 h-10 bg-gradient-to-br from-primary/80 to-primary rounded-xl flex items-center justify-center shadow-lg">
               <User className="h-5 w-5 text-white" />
             </div>
             <div className="hidden lg:block">
-              <p className="text-sm font-semibold text-gray-900">Admin User</p>
-              <p className="text-xs text-gray-500">Super Admin</p>
+              <p className="text-sm font-semibold text-foreground">Enterprise Admin</p>
+              <p className="text-xs text-muted-foreground">System Administrator</p>
             </div>
           </div>
         </div>
