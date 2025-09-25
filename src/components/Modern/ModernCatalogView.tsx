@@ -3,6 +3,15 @@ import { Search, Grid, List, Star, Download, Play, Eye, Award, TrendingUp } from
 import { AOFunction } from '../../types';
 import { mockAOFunctions } from '../../data/mockData';
 
+// Import function domain icons
+import orderHandlingIcon from '../../assets/icons/order-handling.png';
+import finopsIcon from '../../assets/icons/finops.png';
+import networkOpsIcon from '../../assets/icons/network-ops.png';
+import marketingOpsIcon from '../../assets/icons/marketing-ops.png';
+import salesOpsIcon from '../../assets/icons/sales-ops.png';
+import slaIcon from '../../assets/icons/sla.png';
+import sustainabilityIcon from '../../assets/icons/sustainability.png';
+
 interface ModernCatalogViewProps {
   onFunctionSelect: (func: AOFunction) => void;
 }
@@ -14,6 +23,20 @@ export function ModernCatalogView({ onFunctionSelect }: ModernCatalogViewProps) 
   const [functions] = useState(mockAOFunctions);
 
   const domains = ['All', ...Array.from(new Set(functions.map(f => f.domain)))];
+
+  // Function to get domain icon
+  const getDomainIcon = (domain: string) => {
+    const iconMap: Record<string, string> = {
+      'Order Handling': orderHandlingIcon,
+      'FinOps': finopsIcon,
+      'Network Ops': networkOpsIcon,
+      'MarketingOps': marketingOpsIcon,
+      'SalesOps': salesOpsIcon,
+      'SLA': slaIcon,
+      'Sustainability': sustainabilityIcon,
+    };
+    return iconMap[domain] || orderHandlingIcon; // Default fallback
+  };
 
   const filteredFunctions = functions.filter(func => {
     const matchesSearch = func.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -45,10 +68,12 @@ export function ModernCatalogView({ onFunctionSelect }: ModernCatalogViewProps) 
     <div className="modern-card p-6 group hover:shadow-xl transition-all duration-300">
       <div className="flex items-start justify-between mb-6">
         <div className="flex items-center space-x-4">
-          <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
-            <span className="text-white font-bold text-xl">
-              {func.name.charAt(0)}
-            </span>
+          <div className="w-14 h-14 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 p-2">
+            <img 
+              src={getDomainIcon(func.domain)} 
+              alt={`${func.domain} icon`}
+              className="w-full h-full object-contain filter brightness-0 invert"
+            />
           </div>
           <div>
             <h3 className="text-xl font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">

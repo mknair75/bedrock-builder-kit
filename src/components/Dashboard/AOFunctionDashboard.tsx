@@ -17,6 +17,15 @@ import {
 import { AOFunction } from '../../types';
 import { mockAOFunctions } from '../../data/mockData';
 
+// Import function domain icons
+import orderHandlingIcon from '../../assets/icons/order-handling.png';
+import finopsIcon from '../../assets/icons/finops.png';
+import networkOpsIcon from '../../assets/icons/network-ops.png';
+import marketingOpsIcon from '../../assets/icons/marketing-ops.png';
+import salesOpsIcon from '../../assets/icons/sales-ops.png';
+import slaIcon from '../../assets/icons/sla.png';
+import sustainabilityIcon from '../../assets/icons/sustainability.png';
+
 interface AOFunctionDashboardProps {}
 
 interface RuntimeMetrics {
@@ -63,6 +72,20 @@ export const AOFunctionDashboard: React.FC<AOFunctionDashboardProps> = () => {
   const [selectedFunction, setSelectedFunction] = useState<FunctionWithMetrics | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
+
+  // Function to get domain icon
+  const getDomainIcon = (domain: string) => {
+    const iconMap: Record<string, string> = {
+      'Order Handling': orderHandlingIcon,
+      'FinOps': finopsIcon,
+      'Network Ops': networkOpsIcon,
+      'MarketingOps': marketingOpsIcon,
+      'SalesOps': salesOpsIcon,
+      'SLA': slaIcon,
+      'Sustainability': sustainabilityIcon,
+    };
+    return iconMap[domain] || orderHandlingIcon; // Default fallback
+  };
 
   const functionsWithMetrics: FunctionWithMetrics[] = mockAOFunctions.map((func: AOFunction) => ({
     ...func,
@@ -165,9 +188,18 @@ export const AOFunctionDashboard: React.FC<AOFunctionDashboardProps> = () => {
                     }`}
                   >
                     <div className="flex items-start justify-between mb-2">
-                      <div>
-                        <h4 className="font-medium text-gray-900">{func.name}</h4>
-                        <p className="text-xs text-gray-500">{func.domain}</p>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center shadow-sm p-1.5">
+                          <img 
+                            src={getDomainIcon(func.domain)} 
+                            alt={`${func.domain} icon`}
+                            className="w-full h-full object-contain filter brightness-0 invert"
+                          />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-gray-900">{func.name}</h4>
+                          <p className="text-xs text-gray-500">{func.domain}</p>
+                        </div>
                       </div>
                       <div className="flex items-center space-x-2">
                         <HealthIcon className={`h-4 w-4 ${health.color}`} />
@@ -196,13 +228,22 @@ export const AOFunctionDashboard: React.FC<AOFunctionDashboardProps> = () => {
               {/* Function Header */}
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-xl font-bold text-gray-900">{selectedFunction.name}</h3>
-                    <p className="text-gray-600 mt-1">{selectedFunction.description}</p>
-                    <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
-                      <span>Version: {selectedFunction.version}</span>
-                      <span>Provider: {selectedFunction.provider}</span>
-                      <span>Mode: {selectedFunction.currentMode}</span>
+                  <div className="flex items-start space-x-4">
+                    <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-lg p-3">
+                      <img 
+                        src={getDomainIcon(selectedFunction.domain)} 
+                        alt={`${selectedFunction.domain} icon`}
+                        className="w-full h-full object-contain filter brightness-0 invert"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-gray-900">{selectedFunction.name}</h3>
+                      <p className="text-gray-600 mt-1">{selectedFunction.description}</p>
+                      <div className="flex items-center space-x-4 mt-2 text-sm text-gray-500">
+                        <span>Version: {selectedFunction.version}</span>
+                        <span>Provider: {selectedFunction.provider}</span>
+                        <span>Mode: {selectedFunction.currentMode}</span>
+                      </div>
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
